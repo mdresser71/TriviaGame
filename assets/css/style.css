@@ -1,0 +1,205 @@
+body {
+    /*background-image: url(../images/XXXXXXXXXXX OO O O O O  OO  O O O.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover; */  
+    /* background: linear-gradient(to left, blue, red, white, red, blue); */
+    background-color: rgb(30, 193, 247);
+}
+
+.background2 {
+    background-image: url(../images/2018.jpg);
+    background-size: cover;
+}
+
+.header {
+    font-size: 88px;
+    /* font-family: 'Concert One', cursive; */
+    font-family: 'Impact, Charcoal', sans-serif;
+    text-align: center;
+    margin-top: 5px;
+    animation-name: header;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    color: white;
+    width: 100%;
+}
+
+.container {
+    background-color: greenyellow;
+    border-radius: 44px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 500px;
+    width: 1000px;
+    margin-left: -500px;
+    margin-top: -200px;    
+}
+
+#startBtn {
+    position: absolute;
+    top: 93%;
+    left: 50%;
+    height: 50px;
+    width: 300px;
+    font-size: 20px;
+    margin-left: -150px;
+    margin-top: -250px; 
+    animation-name: startBtn;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes startBtn {
+    0%  {background-color: red;
+          color:blue;}
+    25%  {background-color: white;
+          color: red;}
+    50% {background-color: blue;
+          color: white;}
+    75% {background-color: white;
+          color: red;}
+    100% {background-color: red;
+          color: blue;}
+}
+
+.timer {
+    text-align: center;
+    font-size: 50px;
+}
+
+.fiveLeft {
+    color: red;
+}
+
+.eightLeft {
+    color: orange;
+}
+
+.questionSize {
+    font-size: 70px;
+    text-align: center;
+}
+
+.answerSize {
+    font-size: 40px;
+    text-align: center;
+    width: 70%;    
+}
+
+.answer {
+    padding-top: 7px;
+    height: 45px;
+    color: black;
+    padding-left: 14px;
+    background-color: white;
+    border-radius: 4px;
+    margin: 10px 143px;
+}
+
+.answer:hover {
+    background: rgba(128, 147, 232, 0.904);
+}
+
+.finishedSize {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 27px;
+}
+
+.resultsHead {
+    font-size: 60px;
+    position: absolute;
+    top: 81%;
+    left: 20%;
+}
+
+.restartBtn {
+    margin-top: 86px;
+    text-align: center; 
+}
+
+#restartBtn {
+    animation-name: restartBtn;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes restartBtn {
+    0%  {background-color: red;
+          color:blue;}
+    25%  {background-color: white;
+          color: red;}
+    50% {background-color: blue;
+          color: white;}
+    75% {background-color: white;
+          color: red;}
+    100% {background-color: red;
+          color: blue;}
+}
+
+.rightPic {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -89.5px;
+    margin-top: -120px;
+}
+
+.wrongPic {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -120px;
+    margin-top: -120px;
+}
+
+.noTimePic {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -120px;
+    margin-top: -140px;
+}
+
+.rightWrong {
+    position: absolute;
+    top: 85%;
+    left: 21%;
+    font-size: 40px;
+}
+
+.audio {
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    margin-left: -150px;
+}
+
+@media screen and (max-width: 640px) {
+
+    .container {
+        height: 496px;
+        width: 500px;
+        margin-left: -253px;
+        margin-top: -179px; 
+    }
+
+    .questionSize {
+        font-size: 37px;
+        
+    }
+
+    .answerSize {
+        font-size: 37px;
+        margin: 10px 68px;
+    }
+
+    .rightWrong {
+        top: 79%;        
+    }
+
+    .resultsHead {
+        font-size: 31px;
+    }
+}
