@@ -97,10 +97,9 @@ var game = {
 
         panel.html('<h2>Out of Time!</h2>');
         panel.append('<h3>The Correct Answer was: ' + questions[this.currentQuestion].correctAnswer);
-        panel.append('<img src="' + questions[this.currentQuestion].image + '"/>');
 
         if (game.currentQuestion === questions.length - 1) {
-            setTiemout(game.results, 3 * 1000);
+            setTimeout(game.results, 3 * 1000);
         } else {
             setTimeout(game.nextQuestion, 3 * 1000);
         }
@@ -129,7 +128,6 @@ var game = {
         clearInterval(timer);
         panel.html('<h2>NO! Wrong!</h2>');
         panel.append('<h3>The Correct Answer was: ' + questions[this.currentQuestion].correctAnswer + '</h3>');
-        panel.append('<img src="' + questions[game.currentQuestion].image + '" />');
 
         if (game.currentQuestion === questions.length - 1){
             setTimeout(game.results, 3 * 1000);
@@ -141,7 +139,6 @@ var game = {
         clearInterval(timer);
         game.correct++;
         panel.html('<h2>YES! Excellent!</h2>');
-        panel.append('<img src="' + questions[game.currentQuestion].image + '" />');
 
         if (game.currentQuestion === questions.length - 1) {
             setTimeout(game.results, 3 * 1000);
