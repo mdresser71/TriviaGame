@@ -1,157 +1,159 @@
-$(document).ready(function () {
+var panel = $('#quiz-area');
+var countStartNumber = 15;
 
-    var counter = 15;
-    var correctGuesses = 0;
-    var wrongGuesses = 0;
-    var unansweredGuesses = 0;
-    var selectedAnswer = 0;
-    var questionCounter = 0;
-    var clock;
-    var questionsArray = [
-        "According to Greek mythology who was the first woman on Earth?",
-        "Which female Disney character risked her life to save her father?",
-        "Which queen of Egypt was known for her beauty and the mother of King Tut?",
-        "What woman was a prophet and a judge according to the bible?",
-        "Who was the first licensed US Woman Pilot?",
-        "Who was the first human being to travel into space?",
-        "Who performed the supposed first successful human head transplant in 2017?",
-        "What skydiver jumped 25000 feet without a parachute and landed safely?",
-        "Who ruled the largest contiguous empire in world history?",
-        "What is the capital of Kansas?"
-    ];
-    var answersArray = [
-        ["Andromeda", "Aphrodite", "Pandora", "Spotify"],
-        ["Elsa", "Ariel", "Mulan", "Beiber"],
-        ["Nefertiti", "Sheba", "Cleopatra", "Ramses"],
-        ["Deborah", "Felicia", "Betty", "Rosanne"],
-        ["Bessie Coleman", "Janet Jackson", "Amelia Earhart", "Harriet Quimby"],
-        ["Yuri Gagarin", "Buzz Aldrin", "John Glenn", "Amerigo Vespucci"],
-        ["Dr. Sergio Canavero", "Dr. No", "Dr. Suess", "Dr. Gre"],
-        ["Neo", "Tom Cruise", "Luke Aikins", "Garth Brooks"],
-        ["King Tut", "Genghis Kahn", "King Richard the Lionheart", "Suleiman the Magnificent"],
-        ["Witchita", "Topeka", "Overland Park", "Olathe"]
-    ];
-    var correctAnswers = ["Pandora", "Mulan", "Nefertiti", "Deborah", "Harriet Quimby", "Yuri Gagarin", "Dr. Sergio Canavero", "Luke Aikins", "Genghis Kahn", "Topeka"];
 
-    function starGame() {
-        $(".container").html("<p><button id='startBtn'>Click to Start the Trivia Game!</button></p>");
-        $(".container").addClass("background2");
-    }
-    starGame();
-    ///// Button Listener/////
-    $("#startBtn").on("click", function () {
-        questionPage();
-        timer();
-    });
+/// CLICK EVENTS ///
 
-    $("body").on("click", ".answer", function (event) {
-        console.log(this);
-        selectedAnswer = $(this).text();
-        if (selectedAnswer === correctAnswers[questionCounter]) {
-            clearInterval(clock);
-            renderRight();
+$(document).on('click', '#start-over', function(e) {
+    game.reset();
+});
+
+$(document).on('click', '.answer-button', function(e) {
+    game.clicked(e);
+});
+
+$(document).on('click', '#start', function(e) {
+    $('#subwrapper').prepend('<h2>Time Remaining: <span id="counter-number">30</span> Seconds</h2>');
+    game.loadQuestion();
+});
+
+/// QUESTIONS ///
+
+var questions = [{
+    question: "According to Greek mythology who was the first woman on Earth?",
+    answers: ["Andromeda", "Aphrodite", "Pandora", "Spotify"],
+    correctAnswer: "Pandora",
+
+}, {
+    question: "Which female Disney character risked her life to save her father?",
+    answers: ["Elsa", "Ariel", "Mulan", "Beiber"],
+    correctAnswer: "Mulan",
+    
+}, {
+    question: "Which queen of Egypt was known for her beauty and the mother of King Tut?",
+    answers: ["Nefertiti", "Sheba", "Cleopatra", "Ramses"],
+    correctAnswer: "Nefertiti",
+    
+}, {
+    question: "What woman was a prophet and a judge according to the bible?",
+    answers: ["Deborah", "Felicia", "Betty", "Rosanne"],
+    correctAnswer: "Deborah",
+    
+}, {
+    question: "Who was the first licensed US Woman Pilot?",
+    answers: ["Bessie Coleman", "Janet Jackson", "Amelia Earhart", "Harriet Quimby"],
+    correctAnswer: "Harriet Quimby",
+    
+}, {
+    question: "Who was the first human being to travel into space?",
+    answers: ["Yuri Gagarin", "Buzz Aldrin", "John Glenn", "Amerigo Vespucci"],
+    correctAnswer: "Yuri Gagarin",
+   
+}, {
+    question: "Who performed the supposed first successful human head transplant in 2017?",
+    answers: ["Dr. Sergio Canavero", "Dr. No", "Dr. Suess", "Dr. Grey"],
+    correctAnswer: "Dr. Sergio Canavero",
+    
+}, {
+    question: "What skydiver jumped 25000 feet without a parachute and landed safely in 2016?",
+    answers: ["Neo", "Tom Cruise", "Luke Aikins", "Garth Brooks"],
+    correctAnswer: "Luke Aikins",
+    
+}];
+
+///GAME FUNCTIONS///
+
+var game = {
+    questions: questions,
+    currentQuestion: 0,
+    counter: countStartNumber,
+    correct: 0,
+    incorrect: 0,
+    countdown: function() {
+        game.counter--;
+        $('#counter-number').html(game.counter);
+
+        if (game.counter === 0) {
+            console.log('TIME UP');
+            game.timeUp();
         }
-        else {
-            clearInterval(clock);
-            renderWrong();
+    },
+    loadQuestion: function() {
+        timer = setInterval(game.countdown, 1000);
+        panel.html('<h2>' + questions[this.currentQuestion].question + '</h2>' );
+        for (var i = 0; i < questions[this.currentQuestion].answers.length; i++){
+            panel.append('<button class="answer-button" id="button"' + 'data-name="' + questions[this.currentQuestion].answers[i] + '">' + questions[this.currentQuestion].answers[i]+ '</button>');
         }
-    });
+    },
+    nextQuestion: function() {
+        game.counter = countStartNumber;
+        $('#counter-number').html(game.counter);
+        game.currentQuestion++;
+        game.loadQuestion();
+    },
+    timeUp: function() {
+        clearInterval(timer);
+        $('#counter-number').html(game.counter);
 
-    $("body").on("click", "#restartBtn", function (event) {
-        reset();
-    });
+        panel.html('<h2>Out of Time!</h2>');
+        panel.append('<h3>The Correct Answer was: ' + questions[this.currentQuestion].correctAnswer);
+        panel.append('<img src="' + questions[this.currentQuestion].image + '"/>');
 
-    function noTime() {
-        unansweredGuesses++;
-        $(".container").html("<p class='timer'>Time Left: <span class='timeLeft'>" + counter + "</span></span></p>");
-        $(".container").append("<p class='rightWrong'>The correct answer was " + correctAnswers[questionCounter] + "</p>");
-        $(".container").append("<img class='noTimePic' src='assets/images/time.jpg'>");
-        setTimeout(transitionTime, 3000);
-    }
-    /////right answer screen/////
-    function renderRight() {
-        correctGuesses++;
-        $(".container").html("<p class='timer'>Time Left: <span class='timeLeft'>" + counter + "</span></p>");
-        $(".container").append("<p class='rightWrong'>" + correctAnswers[questionCounter] + " was the right answer!!</p>");
-        $(".container").append("<img class='rightPic' src='assets/images/right.png'>");
-        //transitionTime();
-        setTimeout(transitionTime, 3000);
-    }
-    /////wrong answer screen/////
-    function renderWrong() {
-        wrongGuesses++;
-        $(".container").html("<p class='timer'>Time Left: <span class='timeLeft'>" + counter + "</span></p>");
-        $(".container").append("<p class='rightWrong'>The correct answer was " + correctAnswers[questionCounter] + "</p>");
-        $(".container").append("<img class='wrongPic' src='assets/images/wrong.png'>");
-        //transitionTime();
-        setTimeout(transitionTime, 3000);
-    }
-    /////questions/////
-    function questionPage() {
-        $(".container").removeClass("background2");
-        $(".container").html("<p class='timer'>Time Left: <span class='timeLeft'>15</span></p>")
-        $(".container").append("<p class='questionSize'> " + questionsArray[questionCounter] + "</p>");
-        $(".container").append("<p class='answerSize answer'>" + answersArray[questionCounter][0] + "</p>");
-        $(".container").append("<p class='answerSize answer'>" + answersArray[questionCounter][1] + "</p>");
-        $(".container").append("<p class='answerSize answer'>" + answersArray[questionCounter][2] + "</p>");
-        $(".container").append("<p class='answerSize answer'>" + answersArray[questionCounter][3] + "</p>");
-    }
-    /////slide timer/////
-    function transitionTime() {
-        if (questionCounter < 9) {
-            questionCounter++;
-            questionPage();
-            counter = 15;
-            timer();
+        if (game.currentQuestion === questions.length - 1) {
+            setTiemout(game.results, 3 * 1000);
+        } else {
+            setTimeout(game.nextQuestion, 3 * 1000);
         }
-        else {
-            results();
-        }
-    }
-    /////Countdown Timer/////
-    function timer() {
-        clock = setInterval(decrement, 1000);
-        function decrement() {
-            if (counter > 0) {
-                counter--;
-            }
-            if (counter === 5) {
-                $(".timeLeft").addClass("fiveLeft")
-            }
-            if (counter === 0) {
-                clearInterval(clock);
-                noTime();
-            }
-            $(".timeLeft").html(counter);
-        }
-    }
-    /////results page/////
-    function results() {
-        clearInterval(clock);
-        $(".container").html("<p class='timer'>Time Left: <span class='timeLeft'>" + counter + "</span></p>");
-        $(".container").append("<p class='resultsHead'>You finished the game!");
-        $(".container").append("<p class='finishedSize'>Correct Answers: " + correctGuesses + "</p>");
-        $(".container").append("<p class='finishedSize'>Wrong Answers: " + wrongGuesses + "</p>");
-        $(".container").append("<p class='finishedSize'>Unanswered Questions: " + unansweredGuesses + "</p>");
-        $(".container").append("<p class='restartBtn'><button id='restartBtn'>Click to Play Again!</button></p>");
-    }
-    /////resets everything/////
-    function reset() {
-        counter = 15;
-        correctGuesses = 0;
-        wrongGuesses = 0;
-        unansweredGuesses = 0;
-        questionCounter = 0;
-        questionPage();
-        timer();
-    }
+    },
+    results: function() {
+        clearInterval(timer);
 
-    // start the game on click
-    // question appears and a timer starts
-    // over the answers there is a hover effect
-    // player chooses an answer
-    // displays whether incorrect or correct
-    // displays correct answer
-    // if an answer is given or if the timer expires the next question appears
-    // after all questions, display correct incorrect and unanswered
-    // if hit start over button, goes automatically to the first question, does not reload ////
+        panel.html('<h2>Complete! Here are your scores!</h2>');
+        $('#counter-number').html(game.counter);
+        panel.append('<h3>Correct Answers: ' + game.correct + '</h3>');
+        panel.append('<h3>Incorrect Answers: ' + game.incorrect + '</h3>');
+        panel.append('<h3>Unanswered: ' + (questions.length - (game.incorrect + game.correct)) + '</h3>');
+        panel.append('<br><button id="start-over">Start Over?</button>');
+    },
+    clicked: function(e) {
+        clearInterval(timer);
+
+        if ($(e.target).data("name") === questions[this.currentQuestion].correctAnswer){
+            this.answeredCorrectly();
+        } else {
+            this.answeredIncorrectly();
+        }
+    },
+    answeredIncorrectly: function () {
+        game.incorrect++;
+        clearInterval(timer);
+        panel.html('<h2>NO! Wrong!</h2>');
+        panel.append('<h3>The Correct Answer was: ' + questions[this.currentQuestion].correctAnswer + '</h3>');
+        panel.append('<img src="' + questions[game.currentQuestion].image + '" />');
+
+        if (game.currentQuestion === questions.length - 1){
+            setTimeout(game.results, 3 * 1000);
+        } else {
+            setTimeout(game.nextQuestion, 3 * 1000);
+        }
+    },
+    answeredCorrectly: function(){
+        clearInterval(timer);
+        game.correct++;
+        panel.html('<h2>YES! Excellent!</h2>');
+        panel.append('<img src="' + questions[game.currentQuestion].image + '" />');
+
+        if (game.currentQuestion === questions.length - 1) {
+            setTimeout(game.results, 3 * 1000);
+        } else {
+            setTimeout(game.nextQuestion, 3 * 1000);
+        }
+    },
+    reset: function() {
+        this.currentQuestion = 0;
+        this.counter = countStartNumber;
+        this.correct = 0;
+        this.incorrect = 0;
+        this.loadQuestion();
+    }
+};

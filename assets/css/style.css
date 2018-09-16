@@ -1,205 +1,67 @@
+html, body {
+    height: 100%;
+}
+
 body {
-    /*background-image: url(../images/XXXXXXXXXXX OO O O O O  OO  O O O.jpg); 
-    background-repeat: no-repeat;
-    background-size: cover; */  
-    /* background: linear-gradient(to left, blue, red, white, red, blue); */
-    background-color: rgb(30, 193, 247);
+    background-image: url(../images/background.jpg);
 }
 
-.background2 {
-    background-image: url(../images/2018.jpg);
-    background-size: cover;
+#wrapper {
+    margin: 5.5% auto;
+    background-color: rgb(104, 220, 202);
+    width: 960px;
+    height: 90%;
+    box-sizing: border-box;
 }
 
-.header {
-    font-size: 88px;
-    /* font-family: 'Concert One', cursive; */
-    font-family: 'Impact, Charcoal', sans-serif;
-    text-align: center;
-    margin-top: 5px;
-    animation-name: header;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    color: white;
-    width: 100%;
-}
-
-.container {
-    background-color: greenyellow;
-    border-radius: 44px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    height: 500px;
-    width: 1000px;
-    margin-left: -500px;
-    margin-top: -200px;    
-}
-
-#startBtn {
-    position: absolute;
-    top: 93%;
-    left: 50%;
-    height: 50px;
-    width: 300px;
-    font-size: 20px;
-    margin-left: -150px;
-    margin-top: -250px; 
-    animation-name: startBtn;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-}
-
-@keyframes startBtn {
-    0%  {background-color: red;
-          color:blue;}
-    25%  {background-color: white;
-          color: red;}
-    50% {background-color: blue;
-          color: white;}
-    75% {background-color: white;
-          color: red;}
-    100% {background-color: red;
-          color: blue;}
-}
-
-.timer {
-    text-align: center;
-    font-size: 50px;
-}
-
-.fiveLeft {
-    color: red;
-}
-
-.eightLeft {
-    color: orange;
-}
-
-.questionSize {
-    font-size: 70px;
+#subwrapper {
+    position: relative;
+    font-family: 'Arial Black Header';
     text-align: center;
 }
 
-.answerSize {
-    font-size: 40px;
-    text-align: center;
-    width: 70%;    
+button {
+    display: block;
+    width: 50%;
+    height: 20%;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    font-size: 42px;
 }
 
-.answer {
-    padding-top: 7px;
-    height: 45px;
+img {
+    height: 200px;
+}
+
+h1 {
+    font-size: 5.5em;
+    font-weight: bold;
     color: black;
-    padding-left: 14px;
-    background-color: white;
-    border-radius: 4px;
-    margin: 10px 143px;
-}
-
-.answer:hover {
-    background: rgba(128, 147, 232, 0.904);
-}
-
-.finishedSize {
-    font-size: 40px;
+    padding-top: 2.5%;
     text-align: center;
-    margin-top: 27px;
+    font-family: 'Arial Black';
 }
 
-.resultsHead {
-    font-size: 60px;
-    position: absolute;
-    top: 81%;
-    left: 20%;
+h2 {
+    font-size: 35px;
+    margin-bottom: 25px;
 }
 
-.restartBtn {
-    margin-top: 86px;
-    text-align: center; 
+h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
-#restartBtn {
-    animation-name: restartBtn;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
+#start {
+    margin-top: 10%;
+    border: 5px solid rgb(110, 56, 235);
+    background: rgb(240, 238, 162);
+    font-family: 'Arial Black';
 }
 
-@keyframes restartBtn {
-    0%  {background-color: red;
-          color:blue;}
-    25%  {background-color: white;
-          color: red;}
-    50% {background-color: blue;
-          color: white;}
-    75% {background-color: white;
-          color: red;}
-    100% {background-color: red;
-          color: blue;}
-}
-
-.rightPic {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -89.5px;
-    margin-top: -120px;
-}
-
-.wrongPic {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -120px;
-    margin-top: -120px;
-}
-
-.noTimePic {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -120px;
-    margin-top: -140px;
-}
-
-.rightWrong {
-    position: absolute;
-    top: 85%;
-    left: 21%;
-    font-size: 40px;
-}
-
-.audio {
-    position: absolute;
-    left: 50%;
-    top: 90%;
-    margin-left: -150px;
-}
-
-@media screen and (max-width: 640px) {
-
-    .container {
-        height: 496px;
-        width: 500px;
-        margin-left: -253px;
-        margin-top: -179px; 
-    }
-
-    .questionSize {
-        font-size: 37px;
-        
-    }
-
-    .answerSize {
-        font-size: 37px;
-        margin: 10px 68px;
-    }
-
-    .rightWrong {
-        top: 79%;        
-    }
-
-    .resultsHead {
-        font-size: 31px;
-    }
+button:hover {
+    border: 5px solid rgb(28, 244, 240);
+    background: rgb(240, 238, 162);
 }
